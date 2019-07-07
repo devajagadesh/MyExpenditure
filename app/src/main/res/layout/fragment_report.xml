@@ -1,0 +1,58 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/frmDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:padding="10dp"
+            android:layout_marginLeft="40dp"
+            android:text="From date"
+            android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/toDate"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:padding="10dp"
+            android:layout_marginRight="40dp"
+            android:text="To date"
+            android:textColor="@android:color/white" />
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/frmDate"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/reportspinner">
+
+      </androidx.appcompat.widget.AppCompatSpinner>
+        <Button
+            android:id="@+id/submitbtn"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toDate"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="5dp"
+
+            android:background="@color/colorAccent"
+            android:padding="10dp"
+            android:text="Submit"
+            android:textColor="@android:color/white" />
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/reportwebview"
+            android:layout_below="@id/reportspinner"></WebView>
+    </RelativeLayout>
+
+</FrameLayout>
