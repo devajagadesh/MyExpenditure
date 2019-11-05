@@ -168,7 +168,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(strSQL, null);
         double cramount = 0;
         double dramount=0;
-        String data="<html><body><center>";
+        String data="<html><body><br><br><center>";
         String credit="<h3>INCOME</h3><br<br><table border=1><tr>" +
                 "<th>S.no</th>" +
                 "<th>Date</th>" +
