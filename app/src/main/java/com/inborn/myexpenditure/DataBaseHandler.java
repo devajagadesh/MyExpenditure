@@ -164,17 +164,17 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         {
             description="DESCRIPTION='"+spinnerdata+"' AND";
         }
-        String strSQL = "SELECT * FROM MYEXPENSE where  ("+temp+")";
+        String strSQL = "SELECT * FROM MYEXPENSE where  ("+description+temp+")";
         Cursor cursor = db.rawQuery(strSQL, null);
         double cramount = 0;
         double dramount=0;
         String data="<html><body><center>";
-        String credit="<h3>CREDIT</h3><br<br><table border=1><tr>" +
+        String credit="<h3>INCOME</h3><br<br><table border=1><tr>" +
                 "<th>S.no</th>" +
                 "<th>Date</th>" +
                 "<th>Description</th>" +
-                "<th>Amount</th></tr>";
-        String debit="<br><h3>DEBIT</h3><br<br><table border=1><tr>" +
+                "<th >Amount</th></tr>";
+        String debit="<br><h3>EXPENSE</h3><br<br><table border=1><tr>" +
                 "<th>S.no</th>" +
                 "<th>Date</th>" +
                 "<th>Description</th>" +
@@ -183,12 +183,12 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 int cri=1,dri=1;
                 do {
-                    if(cursor.getString(5).equals("Credit"))
+                    if(cursor.getString(5).equals("INCOME"))
                     {
                         credit=credit+"<tr><td>"+cri+"</td>";
                         credit=credit+"<td>"+cursor.getString(1)+"</td>";
                         credit=credit+"<td>"+cursor.getString(2)+"</td>";
-                        credit=credit+"<td>"+cursor.getString(4)+"</td>";
+                        credit=credit+"<td align=\"right\">"+Double.parseDouble(cursor.getString(4))+"</td>";
                         cramount=cramount+Double.valueOf(cursor.getString(4));
                         cri++;
                     }
@@ -197,7 +197,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                         debit=debit+"<tr><td>"+dri+"</td>";
                         debit=debit+"<td>"+cursor.getString(1)+"</td>";
                         debit=debit+"<td>"+cursor.getString(2)+"</td>";
-                        debit=debit+"<td>"+cursor.getString(4)+"</td>";
+                        debit=debit+"<td align=\"right\">"+Double.parseDouble(cursor.getString(4))+"</td>";
                         dramount=dramount+Double.valueOf(cursor.getString(4));
                         dri++;
                     }
@@ -206,8 +206,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             }
         }
         cursor.close();
-        credit=credit+"<tr><td></td><td></td><td>Total</td><td>"+cramount+"</td></tr></table>";
-        debit=debit+"<tr><td></td><td></td><td>Total</td><td>"+dramount+"</td></tr></table>";
+        credit=credit+"<tr><td></td><td></td><td>Total</td><td align=\"right\">"+cramount+"</td></tr></table>";
+        debit=debit+"<tr><td></td><td></td><td>Total</td><td align=\"right\">"+dramount+"</td></tr></table>";
 
         data=data+credit+debit+"<br><br><h3>Balance="+(cramount-dramount);
         return data;

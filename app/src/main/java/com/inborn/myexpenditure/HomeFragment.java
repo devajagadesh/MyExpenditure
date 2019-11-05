@@ -51,8 +51,8 @@ public class HomeFragment extends Fragment {
         crdrSpinner=view.findViewById(R.id.crordr);
         saveButton=view.findViewById(R.id.save);
         final List<String> crdrlist = new ArrayList<String>();
-        crdrlist.add("Credit");
-        crdrlist.add("Debit");
+        crdrlist.add("INCOME");
+        crdrlist.add("EXPENSE");
         ArrayAdapter spinneradapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item,crdrlist);
         spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         crdrSpinner.setAdapter(spinneradapter);
@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (descAutoCompleteTextView.getText().toString().length()>2&&amountEditText.getText().toString().length()>1)
+                if (descAutoCompleteTextView.getText().toString().length()>=2&&amountEditText.getText().toString().length()>=1)
                 {
                     final DataBaseHandler handler=new DataBaseHandler(context);
                     int response=handler.addMyExpense(curdate,descAutoCompleteTextView.getText().toString(),"0",amountEditText.getText().toString(),crdrSpinner.getSelectedItem().toString());

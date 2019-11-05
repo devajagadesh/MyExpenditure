@@ -14,14 +14,9 @@ import android.widget.DatePicker;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.fragment.app.Fragment;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class ReportFragment extends Fragment {
