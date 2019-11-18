@@ -116,7 +116,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             String arrData[] = null;
             SQLiteDatabase db= this.getReadableDatabase();
 
-            String strSQL = "SELECT DISTINCT DESCRIPTION FROM MYEXPENSE";
+            String strSQL = "SELECT DISTINCT DESCRIPTION FROM MYEXPENSE ORDER  BY DESCRIPTION ASC";
             Cursor cursor = db.rawQuery(strSQL, null);
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
@@ -149,22 +149,42 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         String temp="";
         Calendar cal = Calendar.getInstance();
         cal.setTime(startDate);
-        while (cal.getTime().before(endDate)) {
-            Date date = cal.getTime();
 
-                temp=temp+" DATE='"+formatter.format(date)+"' OR";
-
-            cal.add(Calendar.DATE, 1);
-        }
-        temp=temp+" DATE='"+formatter.format(endDate)+"' ";
 
         SQLiteDatabase db= this.getReadableDatabase();
         String description="";
         if(!spinnerdata.equals("ALL"))
         {
-            description="DESCRIPTION='"+spinnerdata+"' AND";
+
+            while (cal.getTime().before(endDate)) {
+                Date date = cal.getTime();
+
+                temp=temp+"( DATE='"+formatter.format(date)+"'  AND DESCRIPTION='"+spinnerdata+"') OR";
+
+                cal.add(Calendar.DATE, 1);
+            }
+            temp=temp+"( DATE='"+formatter.format(endDate)+"'  AND DESCRIPTION='"+spinnerdata+"')";
+
+
+            description=temp;
+
+
+
         }
-        String strSQL = "SELECT * FROM MYEXPENSE where  ("+description+temp+")";
+        else
+        {
+            while (cal.getTime().before(endDate)) {
+                Date date = cal.getTime();
+
+                temp=temp+" DATE='"+formatter.format(date)+"' OR";
+
+                cal.add(Calendar.DATE, 1);
+            }
+            temp=temp+" DATE='"+formatter.format(endDate)+"' ";
+            description=temp;
+        }
+        String strSQL = "SELECT * FROM MYEXPENSE where  ("+description+")";
+        Log.d("query",strSQL);
         Cursor cursor = db.rawQuery(strSQL, null);
         double cramount = 0;
         double dramount=0;
